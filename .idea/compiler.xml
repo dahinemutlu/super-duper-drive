@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cloudstorage" />
+        <module name="cloudstorage-2" />
+        <module name="cloudstorage-32" />
+        <module name="cloudstorage-3" />
+        <module name="cloudstorage-33" />
+        <module name="cloudstorage-41" />
+        <module name="cloudstorage-31" />
+        <module name="dahi-super-duper-drive" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloudstorage" options="-parameters" />
+      <module name="cloudstorage-2" options="-parameters" />
+      <module name="cloudstorage-3" options="-parameters" />
+      <module name="cloudstorage-31" options="-parameters" />
+      <module name="cloudstorage-32" options="-parameters" />
+      <module name="cloudstorage-33" options="-parameters" />
+      <module name="cloudstorage-41" options="-parameters" />
+      <module name="dahi-super-duper-drive" options="-parameters" />
+    </option>
+  </component>
+</project>

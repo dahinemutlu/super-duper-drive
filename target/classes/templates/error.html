@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Page Not Found - SuperDuperDrive</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><img src="/assets/img/SuperDuperDrive_logo_small.png" style="width: 35px;"></div>
+                    <div class="sidebar-brand-text mx-3"><span style="font-family: Roboto, sans-serif;font-size: 17px;text-transform: none;">SuperDuperDrive</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="home"><i class="fas fa-cloud"></i><span>Drive</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="login"><i class="far fa-user-circle"></i><span>Login</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
+                    <li class="nav-item">
+                        <form class="nav-link"><button class="btn btn-primary" id="logout-button" type="submit"><i class="fas fa-sign-out-alt"></i><span style="color: rgb(255,255,255,.8);">Logout</span></button></form>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span th:text="${fullname}" class="d-none d-lg-inline me-2 text-gray-600 small">Firstname Lastname</span><i class="fa fa-user-circle" style="font-size: 30px;"></i></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <form class="dropdown-item"><button class="btn btn-primary" id="logout-button-2" type="submit"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i><span style="color: rgb(58,59,60);">Logout</span></button></form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="text-center mt-5">
+                        <div class="error mx-auto" data-text="404">
+                            <p class="m-0">404</p>
+                        </div>
+                        <p class="text-dark mb-5 lead">Page Not Found</p>
+                        <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a href="/home">← Back to Home</a>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>© 2021 Dahi Nemutlu</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-slim.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
+
+</html>

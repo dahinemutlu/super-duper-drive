@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - SuperDuperDrive</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><img src="assets/img/SuperDuperDrive_logo_small.png" style="width: 35px;"></div>
+                    <div class="sidebar-brand-text mx-3"><span style="font-family: Roboto, sans-serif;font-size: 17px;text-transform: none;">SuperDuperDrive</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href="home"><i class="fas fa-cloud"></i><span>Drive</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="login"><i class="far fa-user-circle"></i><span>Login</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
+                    <li class="nav-item">
+                        <form action="#" th:action="@{/logout}" method="POST" class="nav-link"><button class="btn btn-primary" id="logout-button" type="submit"><i class="fas fa-sign-out-alt"></i><span style="color: rgb(255,255,255,.8);">Logout</span></button></form>
+                    </li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span th:text="${fullname}" class="d-none d-lg-inline me-2 text-gray-600 small">Firstname Lastname</span><i class="fa fa-user-circle" style="font-size: 30px;"></i></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <form action="#" th:action="@{/logout}" method="POST" class="dropdown-item"><button class="btn btn-primary" id="logout-button-2" type="submit"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i><span style="color: rgb(58,59,60);">Logout</span></button></form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div th:if="${successMessage}" class="alert alert-success" role="alert" id="success-msg"><span th:text="${successMessage}">Success message</span></div>
+                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" id="error-msg"><span th:text="${errorMessage}">Error message</span></div>
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" id="nav-files-tab" href="#nav-files">Files</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" id="nav-notes-tab" href="#nav-notes">Notes</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" id="nav-credentials-tab" href="#nav-credentials">Credentials</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" id="nav-files">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <form action="#" enctype="multipart/form-data" th:action="@{'/file/upload'}" method="POST">
+                                            <div class="row">
+                                                <div class="col"><input class="form-control" type="file" id="fileUpload" name="fileUpload"></div>
+                                                <div class="col"><button class="btn btn-primary" type="submit">Upload</button></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 45px;"></th>
+                                                        <th style="width: 50px;"></th>
+                                                        <th>Files</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="file: ${files}">
+                                                        <td style="width: 45px;"><a th:href="@{/file/download/{fileId}(fileId = ${file.fileId})}" class="btn btn-primary" role="button" style="width: 40px;height: 40px;border-radius: 160px;" target="_blank"><i class="fa fa-download"></i></a></td>
+                                                        <td style="width: 50px;"><a th:href="@{/file/delete/{fileId}(fileId = ${file.fileId})}" class="btn btn-danger" role="button" style="width: 40px;height: 40px;border-radius: 160px;"><i class="fa fa-trash"></i></a></td>
+                                                        <td th:text="${file.fileName}" style="vertical-align: middle;">ExampleFile.txt</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="nav-notes">
+                                <div class="card shadow">
+                                    <div class="card-header py-3"><button id="add-note-button" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#noteModal">Add Note</button></div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 45px;"></th>
+                                                        <th style="width: 50px;"></th>
+                                                        <th style="width: 35%;">Title</th>
+                                                        <th style="width: 65%;">Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="note : ${notes}">
+                                                        <td style="width: 45px;"><button
+                                                                th:data-parameter1="${note.NoteId}"
+                                                                th:data-parameter2="${note.NoteTitle}"
+                                                                th:data-parameter3="${note.NoteDescription}"
+                                                                th:onclick="showNoteModal(this.getAttribute('data-parameter1'), this.getAttribute('data-parameter2'), this.getAttribute('data-parameter3'))"
+                                                                class="btn btn-primary" id="edit-note-button" type="button" style="width: 40px;height: 40px;border-radius: 160px;"><i class="fa fa-edit"></i></button></td>
+                                                        <td style="width: 50px;"><a th:href="@{/note/delete/{noteId}(noteId = ${note.noteId})}" class="btn btn-danger" role="button" id="delete-note-button" style="width: 40px;height: 40px;border-radius: 160px;"><i class="fa fa-trash"></i></a></td>
+                                                        <td th:text="${note.noteTitle}" id="table-note-title" style="width: 35%;vertical-align: middle;">Example Note Title</td>
+                                                        <td th:text="${note.noteDescription}" id="table-note-description" style="width: 65%;vertical-align: middle;">Example Note Description</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal fade" role="dialog" tabindex="-1" id="noteModal">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Note</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form th:object="${note}" th:action="@{'/note/write'}" action="#" method="POST"><input class="form-control" type="hidden" id="note-id" name="noteId"><label class="form-label">Title</label><input class="form-control" type="text" id="note-title" name="noteTitle">
+                                                            <div style="height: 20px;"></div><label class="form-label">Description</label><textarea class="form-control" id="note-description" style="height: 150px;" name="noteDescription"></textarea><button id="noteSubmit" type="submit" class="d-none"></button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button id="note-submit-button" class="btn btn-primary" type="button" onclick="$('#noteSubmit').click();">Save</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="nav-credentials">
+                                <div class="card shadow">
+                                    <div class="card-header py-3"><button id="add-credential-button" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#credentialModal">Add Credential</button></div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 45px;"></th>
+                                                        <th style="width: 50px;"></th>
+                                                        <th style="width: 45%;">URL</th>
+                                                        <th style="width: 35%;">Username</th>
+                                                        <th style="width: 20%;">Password</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="credential : ${credentials}">
+                                                        <td style="width: 45px;"><button
+                                                                th:data-parameter1="${credential.getCredentialId()}"
+                                                                th:data-parameter2="${credential.getUrl()}"
+                                                                th:data-parameter3="${credential.getUsername()}"
+                                                                th:data-parameter4="${credential.getDecryptedPassword()}"
+                                                                th:onclick="showCredentialModal(this.getAttribute('data-parameter1'), this.getAttribute('data-parameter2'), this.getAttribute('data-parameter3'), this.getAttribute('data-parameter4'))"
+                                                                class="btn btn-primary" id="edit-credential-button" type="button" style="width: 40px;height: 40px;border-radius: 160px;"><i class="fa fa-edit"></i></button></td>
+                                                        <td style="width: 50px;"><a th:href="@{/credential/delete/{credentialId}(credentialId = ${credential.getCredentialId()})}" class="btn btn-danger" role="button" id="delete-credential-button" style="width: 40px;height: 40px;border-radius: 160px;"><i class="fa fa-trash"></i></a></td>
+                                                        <td th:text="${credential.url}" id="table-credential-url" style="vertical-align: middle;width: 45%;">Example URL</td>
+                                                        <td th:text="${credential.username}" id="table-credential-username" style="vertical-align: middle;width: 35%;">Example username</td>
+                                                        <td th:text="${credential.password}" id="table-credential-password" style="vertical-align: middle;width: 20%;">Example password</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="modal fade" role="dialog" tabindex="-1" id="credentialModal">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Credential</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form th:object="${credential}" th:action="@{'/credential/write'}" action="#" method="POST"><input class="form-control" type="hidden" id="credential-id" name="credentialId"><label class="form-label">URL</label><input class="form-control" type="text" id="credential-url" name="url">
+                                                            <div style="height: 20px;"></div><label class="form-label">Username</label><input class="form-control" type="text" id="credential-username" name="username">
+                                                            <div style="height: 20px;"></div><label class="form-label">Password</label><input class="form-control" type="text" id="credential-password" name="password"><button id="credentialSubmit" type="submit" class="d-none">Button</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button id="credential-submit-button"class="btn btn-primary" type="button" onclick="$('#credentialSubmit').click();">Save</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>© 2021 Dahi Nemutlu</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-slim.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
+
+</html>
